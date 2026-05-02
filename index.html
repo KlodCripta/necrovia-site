@@ -1,89 +1,496 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Necrovia | Laments of the Fallen</title>
+  <meta name="description" content="Necrovia presents Laments of the Fallen, a gothic doom metal journey through damnation, sorrow and eternal oblivion." />
 
-<title>Laments of the Fallen - Gothic Doom Metal</title>
-<meta name="description" content="Laments of the Fallen is a gothic doom metal album by Klod Cripta, featuring dark atmospheres, deep growls, and ethereal female vocals.">
+  <style>
+    :root {
+      --bg: #000000;
+      --text: #f2f6f5;
+      --muted: #c4d1cf;
+      --accent: #b8d7d4;
+      --accent-dark: #7fa7a3;
+      --border: rgba(184, 215, 212, 0.28);
+      --panel: rgba(0, 0, 0, 0.72);
+    }
 
-<link rel="icon" href="favicon.ico">
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-<style>
-body {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background: #000;
-    color: #e6e6e6;
-    line-height: 1.6;
-}
+    html {
+      scroll-behavior: smooth;
+    }
 
-.container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 60px 20px;
-    text-align: center;
-}
+    body {
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+    }
 
-h1 {
-    font-size: 42px;
-    letter-spacing: 2px;
-    margin-bottom: 10px;
-}
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-h2 {
-    font-size: 20px;
-    color: #9c9c9c;
-    margin-bottom: 40px;
-}
+    img {
+      display: block;
+      max-width: 100%;
+    }
 
-p {
-    font-size: 18px;
-    margin-bottom: 25px;
-}
+    .site-header {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 50;
+      height: 78px;
+      background: rgba(0, 0, 0, 0.88);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(8px);
+    }
 
-.highlight {
-    color: #b30000;
-}
+    .nav {
+      width: min(1180px, calc(100% - 40px));
+      height: 100%;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
 
-.footer {
-    margin-top: 60px;
-    font-size: 14px;
-    color: #666;
-}
-</style>
+    .brand {
+      font-size: 0.95rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      font-size: 0.88rem;
+      color: #e9eeee;
+    }
+
+    .nav-links a {
+      opacity: 0.86;
+      transition: opacity 160ms ease, color 160ms ease;
+    }
+
+    .nav-links a:hover {
+      opacity: 1;
+      color: var(--accent);
+    }
+
+    .top-cta {
+      padding: 10px 22px;
+      border-radius: 4px;
+      background: var(--accent);
+      color: #16201f;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      transition: background 160ms ease, transform 160ms ease;
+    }
+
+    .top-cta:hover {
+      background: #d5eeee;
+      transform: translateY(-1px);
+    }
+
+    .hero {
+      min-height: 100vh;
+      padding: 120px 22px 70px;
+      display: grid;
+      place-items: center;
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(to bottom, rgba(0,0,0,0.45), #000 94%),
+        linear-gradient(to right, rgba(0,0,0,0.88), rgba(0,0,0,0.32), rgba(0,0,0,0.88)),
+        url("assets/laments_of_the_fallen_wallpaper.png") center / cover no-repeat;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at center, rgba(184,215,212,0.08), transparent 42%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      width: min(820px, 100%);
+      margin: 0 auto;
+      text-align: center;
+      padding: 44px 28px;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.40), rgba(0,0,0,0.66));
+      border: 1px solid rgba(255,255,255,0.06);
+      box-shadow: 0 28px 80px rgba(0,0,0,0.55);
+    }
+
+    .hero-logo {
+      width: min(470px, 90%);
+      margin: 0 auto 34px;
+      filter: drop-shadow(0 0 18px rgba(0,0,0,0.85));
+    }
+
+    .eyebrow {
+      color: var(--accent);
+      font-size: 0.82rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+
+    h1 {
+      font-size: clamp(2.2rem, 6vw, 5rem);
+      line-height: 1.05;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 22px;
+    }
+
+    .hero-text {
+      width: min(680px, 100%);
+      margin: 0 auto 30px;
+      font-size: clamp(1rem, 1.8vw, 1.15rem);
+      color: #f4f7f6;
+    }
+
+    .actions {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .button {
+      min-width: 170px;
+      padding: 13px 24px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      font-size: 0.84rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
+    }
+
+    .button.primary {
+      background: var(--accent);
+      color: #172220;
+      border-color: var(--accent);
+    }
+
+    .button.secondary {
+      background: rgba(0,0,0,0.38);
+      color: var(--text);
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent);
+    }
+
+    section {
+      padding: 92px 22px;
+    }
+
+    .wrap {
+      width: min(1120px, 100%);
+      margin: 0 auto;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 0.92fr 1.08fr;
+      align-items: center;
+      gap: 70px;
+    }
+
+    .album-cover {
+      width: min(440px, 100%);
+      margin: 0 auto;
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 32px 100px rgba(0,0,0,0.75);
+    }
+
+    .section-label {
+      color: var(--accent-dark);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      margin-bottom: 12px;
+      font-weight: 700;
+    }
+
+    h2 {
+      color: var(--accent);
+      font-size: clamp(1.8rem, 3.6vw, 3.1rem);
+      line-height: 1.12;
+      margin-bottom: 22px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .text-block {
+      color: var(--muted);
+      font-size: 1.02rem;
+      max-width: 650px;
+    }
+
+    .text-block p + p {
+      margin-top: 16px;
+    }
+
+    .tracks {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 28px;
+      color: var(--text);
+    }
+
+    .track {
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.025);
+      padding: 13px 15px;
+      color: #eaf0ef;
+      font-size: 0.95rem;
+    }
+
+    .track span {
+      color: var(--accent-dark);
+      margin-right: 8px;
+      font-weight: 700;
+    }
+
+    .about {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      background: radial-gradient(circle at center, rgba(184,215,212,0.045), transparent 56%);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+      margin-top: 34px;
+    }
+
+    .member-card {
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.025);
+      padding: 24px;
+    }
+
+    .member-card h3 {
+      color: var(--accent);
+      font-size: 1.25rem;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .member-card p {
+      color: var(--muted);
+    }
+
+    .listen {
+      text-align: center;
+      padding-bottom: 110px;
+    }
+
+    .listen .text-block {
+      margin: 0 auto 28px;
+    }
+
+    .site-footer {
+      padding: 30px 22px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.62);
+      text-align: center;
+      font-size: 0.86rem;
+    }
+
+    @media (max-width: 820px) {
+      .site-header {
+        height: auto;
+        position: absolute;
+      }
+
+      .nav {
+        width: min(100% - 28px, 1180px);
+        padding: 18px 0;
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .nav-links {
+        gap: 16px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .top-cta {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 190px;
+      }
+
+      .hero-content {
+        padding: 30px 20px;
+      }
+
+      .split,
+      .about-grid,
+      .tracks {
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        padding: 70px 20px;
+      }
+    }
+  </style>
 </head>
-
 <body>
+  <header class="site-header">
+    <nav class="nav" aria-label="Main navigation">
+      <a class="brand" href="#top">Necrovia</a>
 
-<div class="container">
+      <div class="nav-links">
+        <a href="#top">Home</a>
+        <a href="#album">Album</a>
+        <a href="#about">Necrovia</a>
+        <a href="#process">Behind the Music</a>
+      </div>
 
-<h1>LAMENTS OF THE FALLEN</h1>
-<h2 class="highlight">Coming Soon</h2>
+      <a class="top-cta" href="https://soundcloud.com/necrovia" target="_blank" rel="noopener noreferrer">Hear the Lament</a>
+    </nav>
+  </header>
 
-<p>
-A journey through ten tracks of pure gothic doom metal, wrapped in dark and melancholic atmospheres.
-Deep growls, intense screams, ethereal female vocals, and evocative lyrics bring to life a powerful and haunting sound.
-</p>
+  <main id="top">
+    <section class="hero" aria-label="Necrovia Laments of the Fallen">
+      <div class="hero-content">
+        <img class="hero-logo" src="assets/Necrovia_logo_trasparente.png" alt="Necrovia logo" />
+        <div class="eyebrow">Debut album</div>
+        <h1>Laments of the Fallen</h1>
+        <p class="hero-text">
+          A gothic doom metal descent through damnation, sorrow and eternal oblivion. Six tracks shaped by deep growls, ethereal female vocals and a funeral atmosphere carved in darkness.
+        </p>
+        <div class="actions">
+          <a class="button primary" href="https://soundcloud.com/necrovia" target="_blank" rel="noopener noreferrer">Hear the Lament</a>
+          <a class="button secondary" href="https://linktr.ee/necrovia" target="_blank" rel="noopener noreferrer">Linktree</a>
+        </div>
+      </div>
+    </section>
 
-<p>
-The essence of gothic and doom merges in an album that tells a tale of torment, damnation, and eternal perdition.
-</p>
+    <section id="album">
+      <div class="wrap split">
+        <div>
+          <img class="album-cover" src="assets/laments_of_the_fallen_wallpaper.png" alt="Laments of the Fallen artwork" />
+        </div>
 
-<p>
-From the shadows of <strong>Tears of Darkness</strong> emerges Klod’s solo journey:
-a path through sorrow and damnation, where his growls intertwine with Luana’s ethereal voice in this first gothic doom metal album.
-</p>
+        <div class="text-block">
+          <div class="section-label">Necrovia presents</div>
+          <h2>Laments of the Fallen</h2>
+          <p>
+            The first Necrovia release follows a soul beyond the threshold of death, through captivity, fading hope, endless laments and final oblivion.
+          </p>
+          <p>
+            The album keeps a gothic doom foundation, with harsh vocals and spectral clean lines moving through the same descent rather than standing apart.
+          </p>
 
-<p>
-Future works will venture into darker realms — gothic black and gothic death metal — expanding the use of scream vocals and pushing further into sonic darkness.
-</p>
+          <div class="tracks" aria-label="Tracklist">
+            <div class="track"><span>01</span>Beyond Eternity</div>
+            <div class="track"><span>02</span>Crypt of the Damned</div>
+            <div class="track"><span>03</span>Fading Hope</div>
+            <div class="track"><span>04</span>The Eternal Weeping</div>
+            <div class="track"><span>05</span>Confessions of the Dead</div>
+            <div class="track"><span>06</span>Eternal Oblivion</div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<div class="footer">
-© Klod Cripta
-</div>
+    <section id="about" class="about">
+      <div class="wrap">
+        <div class="section-label">About the project</div>
+        <h2>Necrovia</h2>
+        <div class="text-block">
+          <p>
+            Necrovia is a gothic doom metal duo formed by Klod Cripta and Luana. Born from previous solo work and years of shared musical ground, the project now stands as a single identity built on contrast: guttural darkness, ethereal vocals and mournful atmospheres.
+          </p>
+          <p>
+            The music is created independently, with modern tools, home recording and direct artistic control. No commercial ambition is required: only the need to give form to darkness.
+          </p>
+        </div>
 
-</div>
+        <div class="about-grid">
+          <div class="member-card">
+            <h3>Klod Cripta</h3>
+            <p>Growl, scream, lyrics, vocal lines and artistic direction.</p>
+          </div>
+          <div class="member-card">
+            <h3>Luana</h3>
+            <p>Clean vocals, ethereal harmonies and female vocal lines.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
+    <section id="process">
+      <div class="wrap split">
+        <div class="text-block">
+          <div class="section-label">Behind the Music</div>
+          <h2>High-quality home recording</h2>
+          <p>
+            Necrovia works through a high-quality home recording method: instrumental foundations are shaped, edited and completed with original lyrics, vocal lines and post-production inside a Linux-based setup.
+          </p>
+          <p>
+            Vocals are recorded with dedicated gear and mixed in REAPER on Arch Linux, keeping the process independent, controlled and close to the emotional core of each song.
+          </p>
+        </div>
+
+        <div class="member-card">
+          <h3>Setup</h3>
+          <p>Arch Linux · KDE Plasma · REAPER DAW · Audient iD4 MKII · RØDE NT1 · Audio-Technica ATH-M20x</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="listen">
+      <div class="wrap">
+        <div class="section-label">Listen</div>
+        <h2>Hear the Lament</h2>
+        <p class="text-block">
+          Follow Necrovia on SoundCloud and Linktree. Additional platforms can be added when the album is ready for release.
+        </p>
+        <div class="actions">
+          <a class="button primary" href="https://soundcloud.com/necrovia" target="_blank" rel="noopener noreferrer">SoundCloud</a>
+          <a class="button secondary" href="https://linktr.ee/necrovia" target="_blank" rel="noopener noreferrer">Linktree</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>© 2026 Necrovia. Independent gothic doom metal project.</p>
+  </footer>
 </body>
 </html>

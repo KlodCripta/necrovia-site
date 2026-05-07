@@ -400,19 +400,17 @@
 
     .about-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 0;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 2px;
       margin-top: 34px;
-      margin-left: calc(-1 * (100vw - min(1100px, 100%)) / 2 - 24px);
-      margin-right: calc(-1 * (100vw - min(1100px, 100%)) / 2 - 24px);
-      border-top: 1px solid var(--border-dim);
-      border-bottom: 1px solid var(--border-dim);
       overflow: hidden;
+      width: 100%;
+      background: var(--border-dim);
     }
 
     .about-grid .member-card {
       aspect-ratio: 16 / 9;
-      max-height: 300px;
+      max-height: 460px;
     }
 
     .member-card {

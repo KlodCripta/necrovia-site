@@ -8,7 +8,7 @@
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://klodcripta.github.io/necrovia/" />
+  <meta property="og:url" content="https://necrovia.net/" />
   <meta property="og:title" content="Necrovia — Laments of the Fallen" />
   <meta property="og:description" content="A gothic doom metal descent through damnation, sorrow and eternal oblivion. Six tracks shaped by deep growls, ethereal female vocals and a funeral atmosphere carved in darkness." />
   <meta property="og:image" content="assets/laments_of_the_fallen_wallpaper.png" />
@@ -28,17 +28,16 @@
 
   <style>
     :root {
-      --bg:          #050505;
-      --surface:     #0a0a0a;
-      --text:        #e8edec;
-      --muted:       #a8b8b5;
-      --dim:         #6a7f7c;
-      --accent:      #9eccc8;
-      --accent-dim:  #5a9490;
-      --border:      rgba(158, 204, 200, 0.18);
-      --border-dim:  rgba(255, 255, 255, 0.06);
-      --font-title:  'Cinzel', Georgia, serif;
-      --font-body:   'Crimson Text', Georgia, serif;
+      --bg:         #050505;
+      --text:       #e8edec;
+      --muted:      #a8b8b5;
+      --dim:        #6a7f7c;
+      --accent:     #9eccc8;
+      --accent-dim: #5a9490;
+      --border:     rgba(158, 204, 200, 0.18);
+      --border-dim: rgba(255, 255, 255, 0.06);
+      --font-title: 'Cinzel', Georgia, serif;
+      --font-body:  'Crimson Text', Georgia, serif;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -156,7 +155,11 @@
       width: 680px;
       max-width: 96%;
       height: 320px;
-      background: radial-gradient(ellipse at center, rgba(0,0,0,0.92) 0%, rgba(0,0,0,0.72) 38%, rgba(0,0,0,0.32) 62%, transparent 78%);
+      background: radial-gradient(ellipse at center,
+        rgba(0,0,0,0.92) 0%,
+        rgba(0,0,0,0.72) 38%,
+        rgba(0,0,0,0.32) 62%,
+        transparent 78%);
       z-index: -1;
       pointer-events: none;
     }
@@ -201,19 +204,42 @@
 
     .hero-text {
       width: min(620px, 100%);
-      margin: 0 auto 34px;
+      margin: 0 auto 0;
       font-size: clamp(1rem, 1.6vw, 1.15rem);
       color: var(--muted);
       font-style: italic;
       animation: fadeUp 1.1s 0.45s ease both;
     }
 
-    .actions {
+    /* scroll hint */
+    .scroll-hint {
+      margin-top: 48px;
       display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 14px;
-      animation: fadeUp 1.1s 0.55s ease both;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      animation: fadeUp 1.1s 0.6s ease both;
+      opacity: 0.5;
+    }
+
+    .scroll-hint span {
+      font-family: var(--font-title);
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent-dim);
+    }
+
+    .scroll-arrow {
+      width: 1px;
+      height: 36px;
+      background: linear-gradient(to bottom, var(--accent-dim), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.4; transform: scaleY(1); }
+      50%       { opacity: 1;   transform: scaleY(1.15); }
     }
 
     /* ── BUTTONS ── */
@@ -328,31 +354,15 @@
       user-select: none;
     }
 
-    .track:hover {
-      border-color: var(--border);
-      color: var(--text);
-      background: rgba(158,204,200,0.04);
-    }
-
-    .track.active {
-      border-color: var(--accent-dim);
-      color: var(--accent);
-      background: rgba(158,204,200,0.06);
-    }
-
+    .track:hover { border-color: var(--border); color: var(--text); background: rgba(158,204,200,0.04); }
+    .track.active { border-color: var(--accent-dim); color: var(--accent); background: rgba(158,204,200,0.06); }
     .track-left { display: flex; align-items: center; gap: 10px; }
 
-    .track-num {
-      color: var(--accent-dim);
-      font-weight: 600;
-      flex-shrink: 0;
-    }
-
+    .track-num { color: var(--accent-dim); font-weight: 600; flex-shrink: 0; }
     .track.active .track-num { color: var(--accent); }
 
     .track-icon {
-      width: 13px;
-      height: 13px;
+      width: 13px; height: 13px;
       flex-shrink: 0;
       fill: var(--accent-dim);
       opacity: 0;
@@ -372,10 +382,7 @@
       transition: max-height 440ms ease, opacity 340ms ease;
     }
 
-    .player-wrap.open {
-      max-height: 200px;
-      opacity: 1;
-    }
+    .player-wrap.open { max-height: 200px; opacity: 1; }
 
     .player-wrap iframe {
       width: 100%;
@@ -384,7 +391,7 @@
       display: block;
     }
 
-    /* ── ABOUT ── */
+    /* ── ABOUT / MEMBER CARDS ── */
     .about {
       border-top: 1px solid var(--border-dim);
       border-bottom: 1px solid var(--border-dim);
@@ -398,15 +405,47 @@
       margin-top: 34px;
     }
 
+    /* Card con foto hover */
     .member-card {
       border: 1px solid var(--border-dim);
       background: rgba(255,255,255,0.022);
-      padding: 26px 28px;
+      padding: 0;
       position: relative;
       overflow: hidden;
       transition: border-color 240ms;
+      min-height: 160px;
     }
 
+    .member-card:hover { border-color: var(--border); }
+
+    /* Foto — nascosta, emerge all'hover */
+    .member-photo {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      opacity: 0;
+      transition: opacity 400ms ease;
+      pointer-events: none;
+    }
+
+    /* Overlay scuro sopra la foto per leggibilità testo */
+    .member-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.88) 38%, rgba(0,0,0,0.32) 100%);
+      opacity: 0;
+      transition: opacity 400ms ease;
+      pointer-events: none;
+    }
+
+    .member-card:hover .member-photo { opacity: 1; }
+    .member-card:hover::after { opacity: 1; }
+
+    /* Accent bar sinistra */
     .member-card::before {
       content: "";
       position: absolute;
@@ -415,10 +454,20 @@
       background: var(--accent-dim);
       opacity: 0;
       transition: opacity 240ms;
+      z-index: 2;
     }
 
-    .member-card:hover { border-color: var(--border); }
     .member-card:hover::before { opacity: 1; }
+
+    .member-info {
+      position: relative;
+      z-index: 3;
+      padding: 26px 28px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
 
     .member-card h3 {
       font-family: var(--font-title);
@@ -426,10 +475,11 @@
       font-size: 1rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     .member-card p { color: var(--muted); font-size: 1rem; }
+    .member-card:hover p { color: #d0dedd; }
 
     /* ── SETUP ── */
     .setup-card {
@@ -465,50 +515,127 @@
       flex-shrink: 0;
     }
 
-    /* ── LISTEN ── */
-    .listen { text-align: center; }
-    .listen .text-block { max-width: 540px; margin: 0 auto 32px; }
-
-    /* ── CONTACT ── */
-    .contact {
-      border-top: 1px solid var(--border-dim);
-      border-bottom: 1px solid var(--border-dim);
+    /* ── LISTEN + CONTACT (sezione unificata in fondo) ── */
+    .listen-contact {
       text-align: center;
-      background: radial-gradient(ellipse at 50% 50%, rgba(158,204,200,0.03) 0%, transparent 65%);
+      border-top: 1px solid var(--border-dim);
+      background: radial-gradient(ellipse at 50% 0%, rgba(158,204,200,0.04) 0%, transparent 55%);
     }
 
-    .contact p {
+    .listen-contact h2 { margin-bottom: 12px; }
+
+    .listen-contact .sub {
       color: var(--muted);
-      font-size: 1.05rem;
       font-style: italic;
-      margin-bottom: 28px;
+      font-size: 1.05rem;
+      margin-bottom: 36px;
     }
 
+    /* Pulsantoni principali */
+    .cta-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .cta-big {
+      padding: 15px 36px;
+      font-family: var(--font-title);
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border: 1px solid var(--border);
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: background 200ms, color 200ms, border-color 200ms, transform 180ms;
+    }
+
+    .cta-big.primary { background: var(--accent); color: #0a0a0a; border-color: var(--accent); }
+    .cta-big.primary:hover { background: #c4e0dd; border-color: #c4e0dd; transform: translateY(-2px); }
+
+    .cta-big.outline { color: var(--accent); }
+    .cta-big.outline:hover { background: rgba(158,204,200,0.08); border-color: var(--accent); transform: translateY(-2px); }
+
+    .cta-big svg { width: 15px; height: 15px; fill: currentColor; flex-shrink: 0; }
+
+    /* Divisore */
+    .platforms-divider {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 0 auto 28px;
+      max-width: 480px;
+    }
+
+    .platforms-divider::before,
+    .platforms-divider::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: var(--border-dim);
+    }
+
+    .platforms-divider span {
+      font-family: var(--font-title);
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--dim);
+      white-space: nowrap;
+    }
+
+    /* Pulsanti piccoli piattaforme */
+    .platform-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 52px;
+    }
+
+    .platform-btn {
+      padding: 8px 18px;
+      border: 1px solid var(--border-dim);
+      font-family: var(--font-title);
+      font-size: 0.64rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--dim);
+      transition: border-color 200ms, color 200ms, background 200ms;
+    }
+
+    .platform-btn:hover {
+      border-color: var(--border);
+      color: var(--muted);
+      background: rgba(255,255,255,0.03);
+    }
+
+    /* Email contact */
     .contact-email {
       display: inline-flex;
       align-items: center;
       gap: 10px;
       font-family: var(--font-title);
-      font-size: 0.8rem;
+      font-size: 0.76rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--accent);
       border: 1px solid var(--border);
-      padding: 14px 28px;
+      padding: 13px 26px;
       transition: background 200ms, color 200ms, border-color 200ms;
     }
 
-    .contact-email:hover {
-      background: var(--accent);
-      color: #0a0a0a;
-      border-color: var(--accent);
-    }
+    .contact-email:hover { background: var(--accent); color: #0a0a0a; border-color: var(--accent); }
+    .contact-email svg { width: 14px; height: 14px; fill: currentColor; flex-shrink: 0; }
 
-    .contact-email svg {
-      width: 15px;
-      height: 15px;
-      flex-shrink: 0;
-      fill: currentColor;
+    .contact-note {
+      margin-top: 12px;
+      font-size: 0.88rem;
+      color: var(--dim);
+      font-style: italic;
     }
 
     /* ── MULTI-PAGE BANNER ── */
@@ -579,11 +706,17 @@
       section { padding: 72px 20px; }
       h1 { font-size: clamp(1.8rem, 8vw, 2.8rem); }
       h2 { font-size: clamp(1.4rem, 5.5vw, 2rem); }
+
+      /* Su mobile le foto si mostrano sempre (no hover) */
+      .member-photo { opacity: 1; }
+      .member-card::after { opacity: 1; }
+      .member-card::before { opacity: 1; }
     }
 
     @media (max-width: 480px) {
       .top-cta { display: none; }
       .nav-links { gap: 14px; }
+      .cta-big { width: 100%; justify-content: center; }
     }
   </style>
 </head>
@@ -600,13 +733,13 @@
         <a href="#listen">Listen</a>
         <a href="#contact">Contact</a>
       </div>
-      <a class="top-cta" href="https://soundcloud.com/necrovia" target="_blank" rel="noopener noreferrer">Hear the Lament</a>
+      <a class="top-cta" href="#listen">Hear the Lament</a>
     </nav>
   </header>
 
   <main id="top">
 
-    <!-- ── HERO ── -->
+    <!-- ── HERO — nessun pulsante, solo testo e scroll hint ── -->
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero-content">
         <img class="hero-logo" src="assets/necrovia_logo_hide.png" alt="Necrovia" />
@@ -616,9 +749,9 @@
           A gothic doom metal descent through damnation, sorrow and eternal oblivion.
           Six tracks shaped by deep growls, ethereal female vocals and a funeral atmosphere carved in darkness.
         </p>
-        <div class="actions">
-          <a class="button primary" href="https://soundcloud.com/necrovia" target="_blank" rel="noopener noreferrer">Hear the Lament</a>
-          <a class="button secondary" href="https://linktr.ee/necrovia" target="_blank" rel="noopener noreferrer">Linktree</a>
+        <div class="scroll-hint" aria-hidden="true">
+          <span>Scroll</span>
+          <div class="scroll-arrow"></div>
         </div>
       </div>
     </section>
@@ -646,7 +779,6 @@
             </p>
           </div>
 
-          <!-- Tracklist: clicca per aprire il player embed -->
           <div class="tracks" role="list" aria-label="Tracklist">
 
             <div class="track" role="listitem"
@@ -711,7 +843,6 @@
 
           </div>
 
-          <!-- Player SoundCloud embed — appare sotto la tracklist -->
           <div class="player-wrap" id="sc-player" aria-live="polite">
             <iframe
               id="sc-iframe"
@@ -741,14 +872,35 @@
         </div>
 
         <div class="about-grid">
+
+          <!-- Klod Cripta — foto con hover -->
           <div class="member-card">
-            <h3>Klod Cripta</h3>
-            <p>Growl, scream, lyrics, vocal lines and artistic direction.</p>
+            <img
+              class="member-photo"
+              src="assets/klod_cripta_necrovia.png"
+              alt="Klod Cripta"
+              loading="lazy"
+            />
+            <div class="member-info">
+              <h3>Klod Cripta</h3>
+              <p>Growl, scream, lyrics, vocal lines and artistic direction.</p>
+            </div>
           </div>
+
+          <!-- Luana — foto con hover -->
           <div class="member-card">
-            <h3>Luana</h3>
-            <p>Clean vocals, ethereal harmonies and female vocal lines.</p>
+            <img
+              class="member-photo"
+              src="assets/luana_necrovia.png"
+              alt="Luana"
+              loading="lazy"
+            />
+            <div class="member-info">
+              <h3>Luana</h3>
+              <p>Clean vocals, ethereal harmonies and female vocal lines.</p>
+            </div>
           </div>
+
         </div>
       </div>
     </section>
@@ -780,36 +932,36 @@
       </div>
     </section>
 
-    <!-- ── LISTEN ── -->
-    <section id="listen" class="listen">
+    <!-- ── LISTEN + CONTACT (sezione unificata) ── -->
+    <section id="listen" class="listen-contact">
       <div class="wrap">
-        <div class="ornament"><span>Listen</span></div>
+        <div class="ornament"><span>Listen &amp; Contact</span></div>
         <h2>Hear the Lament</h2>
-        <div class="text-block">
-          <p>
-            Follow Necrovia on SoundCloud and Linktree.
-            Additional platforms will be added upon official release.
-          </p>
-        </div>
-        <div class="actions" style="margin-top: 32px;">
-          <a class="button primary" href="https://soundcloud.com/necrovia" target="_blank" rel="noopener noreferrer">SoundCloud</a>
-          <a class="button secondary" href="https://linktr.ee/necrovia" target="_blank" rel="noopener noreferrer">Linktree</a>
-        </div>
-      </div>
-    </section>
+        <p class="sub">Follow Necrovia on your platform of choice. More portals will be added upon official release.</p>
 
-    <!-- ── CONTACT ── -->
-    <section id="contact" class="contact">
-      <div class="wrap">
-        <div class="ornament"><span>Contact</span></div>
-        <h2>Get in Touch</h2>
-        <p>For press, collaborations or any enquiry.</p>
-        <a class="contact-email" href="mailto:info@necrovia.net">
-          <svg viewBox="0 0 20 20" aria-hidden="true">
-            <path d="M2 4a2 2 0 012-2h12a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V4zm2 0l6 5 6-5H4zm0 2.236V16h12V6.236l-6 5-6-5z"/>
-          </svg>
-          info@necrovia.net
-        </a>
+        <!-- Pulsantoni principali: Linktree + Email -->
+        <div class="cta-row">
+          <a class="cta-big primary" href="https://linktr.ee/necrovia" target="_blank" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.51 5.3l3.06-3.07 1.99 2-3.06 3.06h4.32v2.8h-4.32l3.06 3.06-1.99 2-4.57-4.57-4.57 4.57-1.99-2 3.06-3.06H3.18V7.3h4.32L4.44 4.23l1.99-2 3.06 3.07V0h4.02v5.3zM9.49 15.07H13.51V24H9.49z"/></svg>
+            Linktree
+          </a>
+          <a class="cta-big outline" id="contact" href="mailto:info@necrovia.net">
+            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M2 4a2 2 0 012-2h12a2 2 0 012 2v12a2 2 0 01-2 2H4a2 2 0 01-2-2V4zm2 0l6 5 6-5H4zm0 2.236V16h12V6.236l-6 5-6-5z"/></svg>
+            info@necrovia.net
+          </a>
+        </div>
+
+        <!-- Piattaforme secondarie -->
+        <div class="platforms-divider"><span>Also available on</span></div>
+        <div class="platform-row">
+          <a class="platform-btn" href="https://soundcloud.com/necrovia" target="_blank" rel="noopener noreferrer">SoundCloud</a>
+          <a class="platform-btn" href="https://necrovia.bandcamp.com/" target="_blank" rel="noopener noreferrer">Bandcamp</a>
+          <a class="platform-btn" href="https://audius.co/necrovia" target="_blank" rel="noopener noreferrer">Audius</a>
+          <a class="platform-btn" href="https://www.reverbnation.com/necrovia" target="_blank" rel="noopener noreferrer">ReverbNation</a>
+        </div>
+
+        <p class="contact-note">For press, collaborations or any enquiry — <a href="mailto:info@necrovia.net" style="color:var(--accent-dim);">info@necrovia.net</a></p>
+
       </div>
     </section>
 
@@ -823,7 +975,6 @@
           Dedicated pages for each track, the full story behind the album and additional content are in the works.
         </p>
         <div class="page-links">
-          <a class="page-link" href="https://soundcloud.com/necrovia" target="_blank" rel="noopener noreferrer">SoundCloud</a>
           <a class="page-link" href="https://linktr.ee/necrovia" target="_blank" rel="noopener noreferrer">Linktree</a>
           <span class="page-link soon">Track Stories — soon</span>
           <span class="page-link soon">Press Kit — soon</span>
@@ -846,11 +997,9 @@
       const playerWrap = document.getElementById('sc-player');
       const iframe     = document.getElementById('sc-iframe');
 
-      // Parametri embed: colore accent teal, autoplay, interfaccia minimalista
       const BASE   = 'https://w.soundcloud.com/player/?url=';
       const PARAMS = '&color=%235a9490&auto_play=true&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false';
 
-      // Icone SVG inline
       const ICON_PLAY = '<path d="M3 2.5l10 5.5-10 5.5z"/>';
       const ICON_STOP = '<rect x="3" y="3" width="10" height="10"/>';
 
@@ -861,7 +1010,6 @@
           const icon  = track.querySelector('.track-icon');
           const scUrl = track.getAttribute('data-sc');
 
-          // Click sulla traccia già attiva → chiudi
           if (active === track) {
             playerWrap.classList.remove('open');
             iframe.src = '';
@@ -871,18 +1019,15 @@
             return;
           }
 
-          // Resetta traccia precedente
           if (active) {
             active.classList.remove('active');
             active.querySelector('.track-icon').innerHTML = ICON_PLAY;
           }
 
-          // Attiva la nuova
           track.classList.add('active');
           icon.innerHTML = ICON_STOP;
           active = track;
 
-          // Carica iframe
           iframe.src = BASE + encodeURIComponent(scUrl) + PARAMS;
           playerWrap.classList.add('open');
         });

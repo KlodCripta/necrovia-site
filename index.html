@@ -391,7 +391,7 @@
       display: block;
     }
 
-    /* ── ABOUT / MEMBER CARDS ── */
+    /* ── ABOUT / MEMBER CARDS — Opzione A ── */
     .about {
       border-top: 1px solid var(--border-dim);
       border-bottom: 1px solid var(--border-dim);
@@ -401,25 +401,25 @@
     .about-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
+      gap: 0;
       margin-top: 34px;
+      border: 1px solid var(--border-dim);
+      overflow: hidden;
     }
 
-    /* Card con foto hover */
     .member-card {
-      border: 1px solid var(--border-dim);
-      background: rgba(255,255,255,0.022);
-      padding: 0;
       position: relative;
       overflow: hidden;
-      transition: border-color 240ms;
-      aspect-ratio: 3 / 4;     /* proporzione ritratto — le foto non vengono tagliate */
-      max-height: 380px;        /* cap su schermi molto larghi */
+      aspect-ratio: 3 / 4;
+      max-height: 420px;
+      background: #0a1210;
+      cursor: default;
     }
 
-    .member-card:hover { border-color: var(--border); }
+    .member-card + .member-card {
+      border-left: 1px solid var(--border-dim);
+    }
 
-    /* Foto — nascosta, emerge all'hover */
     .member-photo {
       position: absolute;
       inset: 0;
@@ -427,60 +427,76 @@
       height: 100%;
       object-fit: cover;
       object-position: center top;
-      opacity: 0;
-      transition: opacity 400ms ease;
+      opacity: 1;
+      transition: transform 500ms ease, filter 500ms ease;
       pointer-events: none;
     }
 
-    /* Overlay scuro sopra la foto per leggibilità testo */
+    .member-card:hover .member-photo {
+      transform: scale(1.04);
+      filter: brightness(1.06);
+    }
+
     .member-card::after {
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.88) 38%, rgba(0,0,0,0.32) 100%);
-      opacity: 0;
-      transition: opacity 400ms ease;
+      background: linear-gradient(to top, rgba(0,0,0,0.88) 28%, rgba(0,0,0,0.38) 60%, rgba(0,0,0,0.12) 100%);
       pointer-events: none;
+      z-index: 1;
     }
 
-    .member-card:hover .member-photo { opacity: 1; }
-    .member-card:hover::after { opacity: 1; }
-
-    /* Accent bar sinistra */
     .member-card::before {
       content: "";
       position: absolute;
-      inset: 0 auto 0 0;
-      width: 2px;
+      top: 0; left: 0; right: 0;
+      height: 2px;
       background: var(--accent-dim);
       opacity: 0;
-      transition: opacity 240ms;
-      z-index: 2;
+      transition: opacity 280ms ease;
+      z-index: 3;
     }
 
     .member-card:hover::before { opacity: 1; }
 
     .member-info {
-      position: relative;
-      z-index: 3;
-      padding: 26px 28px;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      z-index: 2;
+      padding: 24px 26px;
     }
+
+    .member-role {
+      font-family: var(--font-title);
+      font-size: 0.62rem;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--accent-dim);
+      margin-bottom: 6px;
+      transition: color 280ms;
+    }
+
+    .member-card:hover .member-role { color: var(--accent); }
 
     .member-card h3 {
       font-family: var(--font-title);
       color: var(--accent);
-      font-size: 1rem;
+      font-size: 1.05rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
-    .member-card p { color: var(--muted); font-size: 1rem; }
-    .member-card:hover p { color: #d0dedd; }
+    .member-card:hover h3 { color: #c8e8e5; }
+
+    .member-card p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      font-style: italic;
+      line-height: 1.5;
+    }
+
+    .member-card:hover p { color: #ccd8d6; }
 
     /* ── SETUP ── */
     .setup-card {
@@ -701,17 +717,14 @@
       .nav-links { gap: 18px; flex-wrap: wrap; justify-content: center; font-size: 0.7rem; }
       .top-cta { font-size: 0.7rem; padding: 8px 16px; }
       .hero { padding-top: 200px; }
-      .split, .about-grid { grid-template-columns: 1fr; gap: 32px; }
+      .split { grid-template-columns: 1fr; gap: 32px; }
+      .about-grid { grid-template-columns: 1fr; }
+      .member-card { max-height: 340px; aspect-ratio: 4 / 3; }
       .tracks { grid-template-columns: 1fr; gap: 8px; }
       .album-cover { max-width: 360px; }
       section { padding: 72px 20px; }
       h1 { font-size: clamp(1.8rem, 8vw, 2.8rem); }
       h2 { font-size: clamp(1.4rem, 5.5vw, 2rem); }
-
-      /* Su mobile le foto si mostrano sempre (no hover) */
-      .member-photo { opacity: 1; }
-      .member-card::after { opacity: 1; }
-      .member-card::before { opacity: 1; }
     }
 
     @media (max-width: 480px) {
@@ -874,29 +887,19 @@
 
         <div class="about-grid">
 
-          <!-- Klod Cripta — foto con hover -->
           <div class="member-card">
-            <img
-              class="member-photo"
-              src="assets/klod_cripta_necrovia.png"
-              alt="Klod Cripta"
-              loading="lazy"
-            />
+            <img class="member-photo" src="assets/klod_cripta_necrovia.png" alt="Klod Cripta" loading="lazy" />
             <div class="member-info">
+              <p class="member-role">Vocals · Direction</p>
               <h3>Klod Cripta</h3>
               <p>Growl, scream, lyrics, vocal lines and artistic direction.</p>
             </div>
           </div>
 
-          <!-- Luana — foto con hover -->
           <div class="member-card">
-            <img
-              class="member-photo"
-              src="assets/luana_necrovia.png"
-              alt="Luana"
-              loading="lazy"
-            />
+            <img class="member-photo" src="assets/luana_necrovia.png" alt="Luana" loading="lazy" />
             <div class="member-info">
+              <p class="member-role">Clean Vocals</p>
               <h3>Luana</h3>
               <p>Clean vocals, ethereal harmonies and female vocal lines.</p>
             </div>

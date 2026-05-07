@@ -11,7 +11,7 @@
   <meta property="og:url" content="https://necrovia.net/" />
   <meta property="og:title" content="Necrovia — Laments of the Fallen" />
   <meta property="og:description" content="A gothic doom metal descent through damnation, sorrow and eternal oblivion. Six tracks shaped by deep growls, ethereal female vocals and a funeral atmosphere carved in darkness." />
-  <meta property="og:image" content="assets/laments_of_the_fallen_wallpaper.png" />
+  <meta property="og:image" content="https://necrovia.net/assets/laments_of_the_fallen_wallpaper.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:site_name" content="Necrovia" />
@@ -20,7 +20,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Necrovia — Laments of the Fallen" />
   <meta name="twitter:description" content="A gothic doom metal descent through damnation, sorrow and eternal oblivion." />
-  <meta name="twitter:image" content="assets/laments_of_the_fallen_wallpaper.png" />
+  <meta name="twitter:image" content="https://necrovia.net/assets/laments_of_the_fallen_wallpaper.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -413,7 +413,8 @@
       position: relative;
       overflow: hidden;
       transition: border-color 240ms;
-      min-height: 160px;
+      aspect-ratio: 3 / 4;     /* proporzione ritratto — le foto non vengono tagliate */
+      max-height: 380px;        /* cap su schermi molto larghi */
     }
 
     .member-card:hover { border-color: var(--border); }
@@ -971,8 +972,7 @@
         <p class="section-label">Explore</p>
         <h2>More to come</h2>
         <p>
-          This is the main page of the Necrovia site on GitHub Pages.
-          Dedicated pages for each track, the full story behind the album and additional content are in the works.
+          This is the main page of the official Necrovia website.
         </p>
         <div class="page-links">
           <a class="page-link" href="https://linktr.ee/necrovia" target="_blank" rel="noopener noreferrer">Linktree</a>

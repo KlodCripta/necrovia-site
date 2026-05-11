@@ -772,8 +772,19 @@
   }
 
   function closeModal() {
+  const iframeEl = document.getElementById('modal-iframe');
+
+  if (iframeEl) {
+    try {
+      iframeEl.contentWindow.postMessage('{"method":"pause"}', '*');
+    } catch (e) {}
+
+    setTimeout(function() {
+      iframeEl.src = '';
+    }, 50);
+  }
+
     document.getElementById('modal-overlay').classList.remove('open');
-    document.getElementById('modal-iframe').src = '';
     document.body.style.overflow = '';
   }
 

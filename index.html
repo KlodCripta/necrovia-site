@@ -195,6 +195,84 @@
     .player-wrap.open { max-height: 200px; opacity: 1; }
     .player-wrap iframe { width: 100%; height: 166px; border: 1px solid var(--border-dim); display: block; }
 
+    /* ── STANDALONE SINGLES ── */
+    .singles {
+      border-top: 1px solid var(--border-dim);
+      background: radial-gradient(ellipse at 50% 0%, rgba(158,204,200,0.035), transparent 66%);
+    }
+    .singles-heading { margin: 0 0 34px; }
+    .singles-list { display: grid; gap: 22px; }
+    .single-card {
+      display: grid;
+      grid-template-columns: 176px minmax(0, 1fr);
+      gap: 30px;
+      align-items: center;
+      padding: 26px;
+      border: 1px solid var(--border-dim);
+      background: rgba(255,255,255,0.015);
+    }
+    .single-art {
+      display: block;
+      position: relative;
+      width: 176px;
+      aspect-ratio: 1 / 1;
+      padding: 0;
+      border: 1px solid var(--border);
+      background: #0a0b0a;
+      cursor: zoom-in;
+      overflow: hidden;
+      box-shadow: 0 20px 45px rgba(0,0,0,.55);
+      transition: transform 200ms, border-color 200ms;
+    }
+    .single-art:hover, .single-art:focus-visible { transform: translateY(-3px); border-color: var(--accent-dim); }
+    .single-art img { width: 100%; height: 100%; object-fit: cover; }
+    .single-meta {
+      font-family: var(--font-title);
+      font-size: 0.61rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent-dim);
+      margin-bottom: 9px;
+    }
+    .single-card h3 {
+      color: var(--accent);
+      font-family: var(--font-title);
+      font-weight: 700;
+      font-size: clamp(1.22rem, 2.2vw, 1.7rem);
+      letter-spacing: 0.045em;
+      text-transform: uppercase;
+      line-height: 1.22;
+      margin-bottom: 12px;
+    }
+    .single-summary { color: var(--muted); font-size: 1.04rem; margin-bottom: 18px; }
+    .single-play { width: min(340px,100%); }
+    .single-cover-hint { color: var(--dim); font-size: 0.79rem; font-style: italic; margin-top: 9px; text-align: center; }
+
+    /* Zoom per le copertine dei singoli */
+    .artwork-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 350;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 28px;
+      background: rgba(0,0,0,.94);
+      backdrop-filter: blur(6px);
+    }
+    .artwork-overlay.open { display: flex; }
+    .artwork-dialog { position: relative; width: min(700px, 90vw); max-height: 90vh; text-align: center; }
+    .artwork-dialog img { display: block; width: 100%; max-height: 80vh; object-fit: contain; border: 1px solid var(--border); }
+    .artwork-caption { color: var(--muted); font-family: var(--font-title); font-size: 0.67rem; letter-spacing: 0.12em; text-transform: uppercase; margin-top: 12px; }
+    .artwork-close { position: absolute; right: 0; top: 0; transform: translate(40%, -40%); width: 36px; height: 36px; border: 1px solid var(--border); background: #07100e; color: var(--accent); cursor: pointer; font-size: 17px; }
+    @media (max-width: 560px) {
+      .single-card { grid-template-columns: 1fr; gap: 24px; padding: 22px; }
+      .single-art { width: min(176px, 100%); margin: 0 auto; }
+      .single-cover-hint { margin-bottom: 4px; }
+      .single-play { width: 100%; }
+      .artwork-close { transform: none; right: 0; top: -40px; }
+    }
+
     /* ── ABOUT / MEMBER CARDS ── */
     .about { border-top: 1px solid var(--border-dim); border-bottom: 1px solid var(--border-dim); background: radial-gradient(ellipse at 50% 0%, rgba(158,204,200,0.04) 0%, transparent 62%); }
 
@@ -389,6 +467,7 @@
       <div class="nav-links">
         <a href="#top">Home</a>
         <a href="#album">Album</a>
+        <a href="#singles">Singles</a>
         <a href="#about">Band</a>
         <a href="#process">Recording</a>
         <a href="#listen">Listen</a>
@@ -461,6 +540,42 @@
           <div class="player-wrap" id="sc-player" aria-live="polite">
             <iframe id="sc-iframe" allow="autoplay" src="" title="SoundCloud player" loading="lazy"></iframe>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SINGLES: pubblicazioni indipendenti dall’album -->
+    <section id="singles" class="singles" aria-labelledby="singles-title">
+      <div class="wrap">
+        <div class="singles-heading">
+          <p class="section-label">Standalone releases</p>
+          <h2 id="singles-title">Singles</h2>
+        </div>
+        <div class="singles-list">
+          <!-- Aggiungi i futuri singoli come ulteriori <article class="single-card"> qui sotto. -->
+          <article class="single-card">
+            <div>
+              <button type="button" class="single-art" onclick="openArtwork('assets/carnival_of_the_dead.png', 'Carnival of the Dead', this)" aria-label="Enlarge Carnival of the Dead artwork">
+                <img src="assets/carnival_of_the_dead.png" alt="Carnival of the Dead — Halloween single artwork" loading="lazy" />
+              </button>
+              <p class="single-cover-hint">Click to enlarge</p>
+            </div>
+            <div>
+              <p class="single-meta">Halloween single · 31 October 2026</p>
+              <h3>Carnival of the Dead <span style="font-weight:400;white-space:nowrap;">(Halloween Night)</span></h3>
+              <p class="single-summary">One night, the veil between the living and the dead grows thin. An independent Halloween release, outside the Laments of the Fallen album.</p>
+              <button type="button" class="track single-play"
+                data-title="Carnival of the Dead (Halloween Night)"
+                data-sc="https://soundcloud.com/necrovia/carnivalofthedead"
+                data-released="true"
+                data-release="Necrovia · Standalone Single"
+                data-cover="assets/carnival_of_the_dead.png"
+                onclick="openModal(this)">
+                <span class="track-left"><span class="track-num" aria-hidden="true">▶</span><span>Listen &amp; Lyrics</span></span>
+                <span class="track-icons"><svg class="track-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 2.5l10 5.5-10 5.5z"/></svg></span>
+              </button>
+            </div>
+          </article>
         </div>
       </div>
     </section>
@@ -595,6 +710,15 @@
 
   </main>
 
+  <!-- COVER LIGHTBOX -->
+  <div class="artwork-overlay" id="artwork-overlay" role="dialog" aria-modal="true" aria-label="Single artwork" aria-hidden="true">
+    <div class="artwork-dialog">
+      <button type="button" class="artwork-close" onclick="closeArtwork()" aria-label="Close artwork">✕</button>
+      <img id="artwork-large" alt="" src="" />
+      <p class="artwork-caption" id="artwork-caption"></p>
+    </div>
+  </div>
+
   <!-- MODAL LYRICS -->
   <div class="modal-overlay" id="modal-overlay" aria-modal="true" role="dialog">
     <div class="modal" id="modal">
@@ -602,7 +726,7 @@
       <div class="modal-header">
         <img class="modal-cover" id="modal-cover" src="assets/necrovia_laments_of_the_fallen.png" alt="" aria-hidden="true" />
         <div class="modal-header-text">
-          <div class="modal-eyebrow">Necrovia · Laments of the Fallen</div>
+          <div class="modal-eyebrow" id="modal-release">Necrovia · Laments of the Fallen</div>
           <div class="modal-title" id="modal-title">—</div>
           <div class="modal-coming-soon" id="modal-soon" style="display:none;">Coming Soon</div>
         </div>
@@ -637,6 +761,18 @@
   const SC_PARAMS = '&color=%235a9490&auto_play=true&hide_related=true&show_comments=false&show_user=false&show_reposts=false&show_teaser=false';
 
   const TRACKS = {
+    'Carnival of the Dead (Halloween Night)': {
+      released: true, releaseDate: '31 October 2026',
+      copyright: '℗ © 2026 Necrovia – Klod Cripta & Luana', vocals: 'Klod Cripta & Luana',
+      description: 'A standalone Halloween release about the fragile boundary between life and death. For one night, wandering souls cross the veil and walk among the living.',
+      credits: ['Instrumental base: Suno Pro (AI-assisted composition by Klod Cripta)', 'Vocals, vocal melodies and lyrics: Klod Cripta & Luana', 'Production, mix & master in REAPER DAW: Klod Cripta & Luana', 'High-Quality Home Recording'],
+      lyrics: [
+        { label: 'Verse I — Luana', text: 'Don\'t close your eyes...\nDon\'t turn away...\nThey walk with us...\nJust for today.' },
+        { label: 'Verse II — Luana', text: 'Can you hear them... calling your name?\nFrom another world, beyond the flame.' },
+        { label: 'Chorus — Klod (repeated during the track)', text: 'We come to you\nAs shades in pain\nWe walk among you on Halloween night' },
+        { label: 'Bridge — Luana', text: 'Beyond the grave\nThe souls awake\nTonight they stay\nThen fade away.' }
+      ]
+    },
     'Beyond Eternity': {
       released: true, releaseDate: '3 May 2026',
       copyright: '℗ © 2025 Necrovia – Klod Cripta', vocals: 'Klod Cripta',
@@ -746,6 +882,8 @@
     const title    = el.getAttribute('data-title');
     const scUrl    = el.getAttribute('data-sc');
     const released = el.getAttribute('data-released') === 'true';
+    document.getElementById('modal-release').textContent = el.getAttribute('data-release') || 'Necrovia · Laments of the Fallen';
+    document.getElementById('modal-cover').src = el.getAttribute('data-cover') || 'assets/necrovia_laments_of_the_fallen.png';
 
     document.getElementById('modal-title').textContent = title;
     document.getElementById('modal-soon').style.display = released ? 'none' : 'inline-block';
@@ -804,8 +942,37 @@
     if (e.target === this) closeModal();
   });
 
+  let lastArtworkTrigger = null;
+
+  function openArtwork(src, caption, trigger) {
+    lastArtworkTrigger = trigger;
+    const overlay = document.getElementById('artwork-overlay');
+    const image = document.getElementById('artwork-large');
+    image.src = src;
+    image.alt = caption;
+    document.getElementById('artwork-caption').textContent = caption;
+    overlay.classList.add('open');
+    overlay.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    overlay.querySelector('.artwork-close').focus();
+  }
+
+  function closeArtwork() {
+    const overlay = document.getElementById('artwork-overlay');
+    if (!overlay.classList.contains('open')) return;
+    overlay.classList.remove('open');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.getElementById('artwork-large').src = '';
+    document.body.style.overflow = '';
+    if (lastArtworkTrigger) lastArtworkTrigger.focus();
+  }
+
+  document.getElementById('artwork-overlay').addEventListener('click', function(e) {
+    if (e.target === this) closeArtwork();
+  });
+
   document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') closeModal();
+    if (e.key === 'Escape') { closeArtwork(); closeModal(); }
   });
   </script>
 

@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#000000">
+  <meta name="description" content="Official NECROVIA links. Gothic Doom Metal. Music, releases and social channels.">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="NECROVIA — Official Links">
+  <meta property="og:description" content="Enter the world of NECROVIA. Official music and social channels.">
+  <meta property="og:url" content="https://necrovia.net/links/">
+  <meta property="og:image" content="https://necrovia.net/assets/necrovia_logo_hide.png">
+
+  <title>NECROVIA | Official Links</title>
+  <link rel="icon" href="/favicon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      color-scheme: dark;
+      --black: #000000;
+      --silver: #d2d0cd;
+      --light: #f1eeea;
+      --muted: #999592;
+      --border: rgba(204,199,191,.20);
+      --font-title: 'Cinzel', Georgia, serif;
+      --font-body: 'Crimson Text', Georgia, serif;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: #050505;
+      color: var(--silver);
+      font-family: var(--font-body);
+      -webkit-font-smoothing: antialiased;
+      position: relative;
+      isolation: isolate;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    /* CONTENITORE PRINCIPALE */
+
+    .page {
+      position: relative;
+      z-index: 1;
+      width: min(560px, calc(100% - 28px));
+      margin: 0 auto;
+      padding: 38px 0 48px;
+    }
+
+    /* PANNELLO NERO ASSOLUTO */
+
+    .frame {
+      position: relative;
+      padding: clamp(22px, 6vw, 42px);
+
+      background: #000000;
+
+      border: 1px solid rgba(213,209,202,.18);
+
+      box-shadow:
+        0 25px 100px rgba(0,0,0,.90),
+        0 0 75px rgba(0,0,0,.55);
+    }
+
+    /* ANGOLI DECORATIVI */
+
+    .frame::before,
+    .frame::after {
+      content: "";
+      position: absolute;
+      width: 25px;
+      height: 25px;
+      pointer-events: none;
+    }
+
+    .frame::before {
+      top: -1px;
+      left: -1px;
+      border-top: 1px solid #b8b2a8;
+      border-left: 1px solid #b8b2a8;
+    }
+
+    .frame::after {
+      bottom: -1px;
+      right: -1px;
+      border-bottom: 1px solid #b8b2a8;
+      border-right: 1px solid #b8b2a8;
+    }
+
+    /* LOGO E PRESENTAZIONE */
+
+    header {
+      text-align: center;
+    }
+
+    .ornament {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      color: #a49c94;
+      font: 400 1.25rem var(--font-title);
+      margin: 0 auto 10px;
+    }
+
+    .ornament::before,
+    .ornament::after {
+      content: "";
+      width: 46px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #746e68);
+    }
+
+    .ornament::after {
+      transform: rotate(180deg);
+    }
+
+    .logo {
+      display: block;
+      width: min(370px, 100%);
+      height: auto;
+      margin: 0 auto;
+
+      filter:
+        brightness(1.1)
+        drop-shadow(0 0 24px rgba(210,205,197,.075));
+    }
+
+    .identity {
+      font: 500 .68rem var(--font-title);
+      letter-spacing: .32em;
+      color: #c5beb5;
+      text-transform: uppercase;
+      margin: 8px 0 16px;
+    }
+
+    .intro {
+      color: #a8a29d;
+      font: italic 1.15rem/1.45 var(--font-body);
+      max-width: 340px;
+      margin: 0 auto 29px;
+    }
+
+    .divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin: 0 0 29px;
+      color: #aaa49d;
+      font-size: .85rem;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: "";
+      height: 1px;
+      width: 80px;
+      background: linear-gradient(90deg, transparent, var(--border));
+    }
+
+    .divider::after {
+      transform: rotate(180deg);
+    }
+
+    /* SEZIONI */
+
+    .group {
+      margin: 0 0 31px;
+    }
+
+    h2 {
+      margin: 0 0 14px;
+      color: #a9a29a;
+      text-align: center;
+      font: 500 .66rem var(--font-title);
+      letter-spacing: .27em;
+      text-transform: uppercase;
+    }
+
+    .links {
+      display: grid;
+      gap: 10px;
+    }
+
+    /* PULSANTI */
+
+    .link {
+      min-height: 58px;
+      display: grid;
+      grid-template-columns: 42px 1fr 24px;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 14px;
+
+      color: #e4e0dc;
+      text-decoration: none;
+
+      border: 1px solid rgba(209,204,196,.20);
+
+      background: linear-gradient(
+        110deg,
+        rgba(255,255,255,.055),
+        rgba(255,255,255,.015)
+      );
+
+      transition:
+        background .2s,
+        border-color .2s,
+        transform .2s,
+        box-shadow .2s;
+    }
+
+    .link:hover,
+    .link:focus-visible {
+      background: linear-gradient(
+        110deg,
+        rgba(210,204,195,.15),
+        rgba(255,255,255,.04)
+      );
+
+      border-color: rgba(225,218,208,.65);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0,0,0,.32);
+    }
+
+    .link:focus-visible {
+      outline: 2px solid var(--light);
+      outline-offset: 3px;
+    }
+
+    .symbol {
+      display: grid;
+      place-items: center;
+
+      width: 34px;
+      height: 34px;
+
+      border: 1px solid rgba(214,209,200,.21);
+      border-radius: 50%;
+
+      color: #c4beb5;
+      font: 500 .75rem var(--font-title);
+    }
+
+    .name {
+      text-align: center;
+      font: 600 .77rem var(--font-title);
+      letter-spacing: .075em;
+      text-transform: uppercase;
+    }
+
+    .arrow {
+      color: #9d9790;
+      text-align: right;
+      font: 1rem Georgia, serif;
+    }
+
+    .featured {
+      min-height: 68px;
+      border-color: rgba(218,213,205,.5);
+      background: linear-gradient(
+        110deg,
+        rgba(192,184,175,.16),
+        rgba(192,184,175,.045)
+      );
+    }
+
+    .featured .symbol {
+      border-color: rgba(218,213,205,.45);
+      color: var(--light);
+    }
+
+    .featured .name {
+      color: var(--light);
+    }
+
+    /* FOOTER */
+
+    footer {
+      text-align: center;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      color: #85817c;
+    }
+
+    footer p {
+      margin: 6px 0;
+      font-size: .86rem;
+      letter-spacing: .055em;
+    }
+
+    .footer-mark {
+      color: #ada69e;
+      font: 1.2rem var(--font-title);
+      margin-bottom: 12px;
+    }
+
+    /* SMARTPHONE */
+
+    @media (max-width: 480px) {
+      .page {
+        padding: 12px 0 26px;
+      }
+
+      .frame {
+        padding: 25px 17px;
+      }
+
+      .logo {
+        width: min(315px, 100%);
+      }
+
+      .link {
+        min-height: 56px;
+      }
+
+      .name {
+        font-size: .71rem;
+      }
+
+      .intro {
+        font-size: 1.08rem;
+      }
+
+      body::before {
+        filter: blur(35px);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      .link {
+        transition: none;
+      }
+    }
+
+    /* NECROVIA LINKS — ORNAMENTAL GOTHIC */
+
+    body {
+      background: #050505;
+    }
+
+    .frame {
+      background: #000000;
+      border: 1px solid rgba(197,190,181,.18);
+      box-shadow: 0 26px 100px rgba(0,0,0,.88);
+    }
+
+    .frame::before,
+    .frame::after {
+      display: none;
+    }
+
+    .ornamental-frame {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .ornamental-frame::before {
+      content: "";
+      position: absolute;
+      inset: 10px;
+      border: 1px solid rgba(196,189,180,.09);
+    }
+
+    .orn-corner {
+      position: absolute;
+      width: 86px;
+      height: 86px;
+      background: url("ornament-corner.svg") center / contain no-repeat;
+      opacity: .85;
+    }
+
+    .orn-corner.tl { top: -2px; left: -2px; }
+    .orn-corner.tr { top: -2px; right: -2px; transform: scaleX(-1); }
+    .orn-corner.bl { bottom: -2px; left: -2px; transform: scaleY(-1); }
+    .orn-corner.br { bottom: -2px; right: -2px; transform: scale(-1); }
+
+    .orn-crest {
+      position: absolute;
+      left: 50%;
+      width: 108px;
+      height: 54px;
+      background: url("ornament-crest.svg") center / contain no-repeat;
+      transform: translateX(-50%);
+      opacity: .72;
+    }
+
+    .orn-crest.top { top: -21px; }
+    .orn-crest.bottom {
+      bottom: -21px;
+      transform: translateX(-50%) rotate(180deg);
+    }
+
+    .orn-side {
+      position: absolute;
+      top: 50%;
+      color: #bcb6ae;
+      font: 1.2rem Georgia, serif;
+      opacity: .65;
+      transform: translateY(-50%);
+    }
+
+    .orn-side.left { left: -6px; }
+    .orn-side.right { right: -6px; }
+
+    .group h2 {
+      color: #c5beb7;
+      font-size: .73rem;
+    }
+
+    .identity { color: #d0c9c1; }
+
+    @media (max-width: 480px) {
+      body { background-attachment: scroll; }
+      .orn-corner { width: 58px; height: 58px; }
+      .orn-crest { width: 82px; height: 44px; }
+      .orn-crest.top { top: -18px; }
+      .orn-crest.bottom { bottom: -18px; }
+    }
+
+
+    .symbol img {
+      display: block;
+      width: 19px;
+      height: 19px;
+      object-fit: contain;
+    }
+
+
+    .symbol img[src="icons/audius.png"] {
+      width: 23px;
+      height: 23px;
+    }
+
+  </style>
+</head>
+
+<body>
+  <main class="page">
+    <div class="frame">
+      <div class="ornamental-frame" aria-hidden="true">
+        <span class="orn-corner tl"></span>
+        <span class="orn-corner tr"></span>
+        <span class="orn-corner bl"></span>
+        <span class="orn-corner br"></span>
+        <span class="orn-crest top"></span>
+        <span class="orn-crest bottom"></span>
+        <span class="orn-side left">✧</span>
+        <span class="orn-side right">✧</span>
+      </div>
+
+      <header>
+        <div class="ornament" aria-hidden="true">✦</div>
+
+        <img
+          class="logo"
+          src="/assets/necrovia_logo_hide.png"
+          alt="NECROVIA"
+          width="370"
+        >
+
+        <p class="identity">Gothic / Doom Metal</p>
+
+        <p class="intro">
+          Where sorrow becomes sound and darkness finds its voice.
+        </p>
+
+        <div class="divider" aria-hidden="true">✧</div>
+      </header>
+
+      <section class="group" aria-labelledby="official">
+        <h2 id="official">The Official Realm</h2>
+
+        <div class="links">
+          <a class="link featured" href="https://necrovia.net/">
+            <span class="symbol" aria-hidden="true">✦</span>
+            <span class="name">Official Website</span>
+            <span class="arrow" aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </section>
+
+      <section class="group" aria-labelledby="music">
+        <h2 id="music">Enter the Sound</h2>
+
+        <div class="links">
+
+          <a class="link" href="https://soundcloud.com/necrovia"
+             target="_blank" rel="noopener noreferrer">
+            <span class="symbol" aria-hidden="true"><img src="icons/soundcloud.svg" alt=""></span>
+            <span class="name">SoundCloud</span>
+            <span class="arrow" aria-hidden="true">↗</span>
+          </a>
+
+          <a class="link" href="https://necrovia.bandcamp.com/"
+             target="_blank" rel="noopener noreferrer">
+            <span class="symbol" aria-hidden="true"><img src="icons/bandcamp.svg" alt=""></span>
+            <span class="name">Bandcamp</span>
+            <span class="arrow" aria-hidden="true">↗</span>
+          </a>
+
+          <a class="link" href="https://audius.co/necrovia"
+             target="_blank" rel="noopener noreferrer">
+            <span class="symbol" aria-hidden="true"><img src="icons/audius.png" alt=""></span>
+            <span class="name">Audius</span>
+            <span class="arrow" aria-hidden="true">↗</span>
+          </a>
+
+          <a class="link" href="https://www.youtube.com/@necrovia-metal"
+             target="_blank" rel="noopener noreferrer">
+            <span class="symbol" aria-hidden="true"><img src="icons/youtube.svg" alt=""></span>
+            <span class="name">YouTube</span>
+            <span class="arrow" aria-hidden="true">↗</span>
+          </a>
+
+          <a class="link" href="https://www.reverbnation.com/necrovia"
+             target="_blank" rel="noopener noreferrer">
+            <span class="symbol" aria-hidden="true"><img src="icons/reverbnation.svg" alt=""></span>
+            <span class="name">ReverbNation</span>
+            <span class="arrow" aria-hidden="true">↗</span>
+          </a>
+
+        </div>
+      </section>
+
+      <section class="group" aria-labelledby="social">
+        <h2 id="social">Follow the Shadows</h2>
+
+        <div class="links">
+
+          <a class="link" href="https://t.me/necrovia_metal"
+             target="_blank" rel="noopener noreferrer">
+            <span class="symbol" aria-hidden="true"><img src="icons/telegram.svg" alt=""></span>
+            <span class="name">Telegram</span>
+            <span class="arrow" aria-hidden="true">↗</span>
+          </a>
+
+          <a class="link" href="https://www.instagram.com/necrovia.metal"
+             target="_blank" rel="noopener noreferrer">
+            <span class="symbol" aria-hidden="true"><img src="icons/instagram.svg" alt=""></span>
+            <span class="name">Instagram</span>
+            <span class="arrow" aria-hidden="true">↗</span>
+          </a>
+
+          <a class="link" href="https://www.facebook.com/necroviametal"
+             target="_blank" rel="noopener noreferrer">
+            <span class="symbol" aria-hidden="true"><img src="icons/facebook.svg" alt=""></span>
+            <span class="name">Facebook</span>
+            <span class="arrow" aria-hidden="true">↗</span>
+          </a>
+
+          <a class="link" href="https://www.tiktok.com/@necrovia.metal"
+             target="_blank" rel="noopener noreferrer">
+            <span class="symbol" aria-hidden="true"><img src="icons/tiktok.svg" alt=""></span>
+            <span class="name">TikTok</span>
+            <span class="arrow" aria-hidden="true">↗</span>
+          </a>
+
+        </div>
+      </section>
+
+      <footer>
+        <div class="footer-mark" aria-hidden="true">✦</div>
+        <p>© 2026 NECROVIA</p>
+        <p>Independent Gothic Doom Metal</p>
+      </footer>
+
+    </div>
+  </main>
+</body>
+</html>
